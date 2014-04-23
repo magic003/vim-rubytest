@@ -191,8 +191,16 @@ function s:GetStoryLine(str)
   return join(split(split(a:str, 'Scenario\( Outline\)\?:')[1]))
 endfunction
 
+function s:GetMiniSpecName1(str)
+    return "test_0001_" . split(a:str, '"')[1]
+endfunction
+
+function s:GetMiniSpecName2(str)
+    return "test_0001_" . split(a:str, "'")[1]
+endfunction
+
 let s:test_case_patterns = {}
-let s:test_case_patterns['test'] = {'^\s*def test':function('s:GetTestCaseName1'), '^\s*test \s*"':function('s:GetTestCaseName2'), "^\\s*test \\s*'":function('s:GetTestCaseName4'), '^\s*should \s*"':function('s:GetTestCaseName3'), "^\\s*should \\s*'":function('s:GetTestCaseName5')}
+let s:test_case_patterns['test'] = {'^\s*def test':function('s:GetTestCaseName1'), '^\s*test \s*"':function('s:GetTestCaseName2'), "^\\s*test \\s*'":function('s:GetTestCaseName4'), '^\s*should \s*"':function('s:GetTestCaseName3'), "^\\s*should \\s*'":function('s:GetTestCaseName5'), '^\s*it \s*"':function('s:GetMiniSpecName1'), "^\\s*it \\s*'":function('s:GetMiniSpecName2')}
 let s:test_case_patterns['test_suite'] = {'^\s*class Test':function('s:GetTestSuiteName')}
 let s:test_case_patterns['spec'] = {'^\s*\(it\|example\|scenario\|describe\|context\|feature\) \s*':function('s:GetSpecLine')}
 let s:test_case_patterns['feature'] = {'^\s*Scenario\( Outline\)\?:':function('s:GetStoryLine')}
