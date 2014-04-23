@@ -1,3 +1,5 @@
+**This is forked from [janx's vim-rubytest plugin](https://github.com/janx/vim-rubytest). It is enhanced to support test cases written in spec of Minitest. I didn't test whether this plugin is still working with Rspec tests.**
+
 Rubytest.vim
 ============
 
