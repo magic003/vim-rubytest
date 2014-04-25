@@ -192,11 +192,24 @@ function s:GetStoryLine(str)
 endfunction
 
 function s:GetMiniSpecName1(str)
-    return "test_0001_" . split(a:str, '"')[1]
+    let tn = s:GetMiniSpecNumber()
+    return "test_" . printf('%04d_', tn+1) . split(a:str, '"')[1]
 endfunction
 
 function s:GetMiniSpecName2(str)
-    return "test_0001_" . split(a:str, "'")[1]
+    let tn = s:GetMiniSpecNumber()
+    return "test_" . printf('%04d_', tn+1) . split(a:str, "'")[1]
+endfunction
+
+function s:GetMiniSpecNumber()
+    let lines = getline(1, line('.')-1)
+    let tc = 0
+    for line in lines
+        if line =~ '^\s*it \s*'
+            let tc += 1
+        endif
+    endfor
+    return tc
 endfunction
 
 let s:test_case_patterns = {}
